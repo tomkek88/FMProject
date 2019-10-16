@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const dbtest = require('./models/dbConnection')
+const models = require('./models')
 
 const { ApolloServer } = require('apollo-server-express')
 
@@ -9,7 +9,11 @@ const typeDefs = require('./GraphQL/schema')
 const resolvers = require('./GraphQL/resolvers')
 
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+    typeDefs, resolvers, context: {
+        models
+    }
+})
 
 server.applyMiddleware({ app })
 

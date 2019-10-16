@@ -3,7 +3,10 @@ const Sequelize = require('sequelize').Sequelize;
 const sequelize = new Sequelize('fmproject', 'root', 'root', {
     host: "localhost",
     port: 3311,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    define: {
+        timestamps: false
+    }
 })
 
 sequelize.authenticate().then(() => console.log('connected to db')).catch(err => console.log('cannot connect to db', err))
