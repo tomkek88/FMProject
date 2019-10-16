@@ -8,6 +8,7 @@ module.exports = gql`
 
     type Mutation{
         register(username: String!, email: String!, password: String!): Boolean
+        login(username:String!, password: String!):Token
     }
 
     type User {
@@ -16,6 +17,10 @@ module.exports = gql`
         password: String!
         email: String!
 
+    }
+
+    type Token{
+        token:String!
     }
     
 `
