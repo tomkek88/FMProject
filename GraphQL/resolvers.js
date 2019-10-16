@@ -30,6 +30,8 @@ module.exports = {
             const user = await models.User.findOne({ where: { username } });
             if (!user) throw new Error('user not found')
 
+            const isValid = await bcrypt.compare(password, user.password);
+            if (!isValid) throw new Error('invalid password');
 
             try {
                 const payload = {
