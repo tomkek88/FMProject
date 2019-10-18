@@ -1,0 +1,23 @@
+.navBar{
+    display: flex;
+    justify-content: flex-end;
+    
+    background-color: rgba(37, 24, 24, 0.63);
+    height: 50px;
+    .navComponent {
+        display: flex;
+        // border: solid red 1px;
+        color: white;
+        text-decoration: none;
+        align-items: center;
+        text-transform: uppercase;
+        padding: 0 20px;
+        
+
+
+        
+    
+    
+    }
+}
+

@@ -7,16 +7,41 @@ const user = (sequelize, DataTypes) => {
         },
         username: {
             type: DataTypes.STRING,
-            required: true
+            required: true,
+            allowNull: false,
+            validate: {
+                isNull: {
+
+                    msg: 'Username field is required'
+                },
+                len: {
+                    args: [5, 30],
+                    msg: 'Username must be between 5 and 30 characters'
+                },
+
+            }
+
         },
         email: {
             type: DataTypes.STRING,
             unique: true,
-            required: true
+            required: true,
+            allowNull: false,
+            validate: {
+
+                len: {
+                    args: [6, 30],
+                    msg: 'Email must be between 6 and 30 characters'
+                },
+
+            }
         },
         password: {
             type: DataTypes.STRING,
-            required: true
+            required: true,
+
+            allowNull: false
+
         }
     })
 

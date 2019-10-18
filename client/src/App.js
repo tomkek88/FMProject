@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import activeSession from './components/Auth/activeSession'
+import LandingPage from './components/LandingPage/LandingPage'
+import LoginPage from './components/LoginPage/LoginPage'
+import NavNotAuth from './components/Navigation/NavNotAuth/NavNotAuth'
+import NavAuth from './components/Navigation/NavAuth/NavAuth'
+import RegisterPage from './components/RegisterPage/RegisterPage';
 
-function App() {
+const App = (props) => {
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+      <Router>
+        {props.session && props.session.me ? <NavAuth /> : <NavNotAuth />}
+
+        <Route exact path='/' component={LandingPage} />
+        <Route path='/login' component={() => <LoginPage refetch={props.refetch} />} />
+        <Route path='/register' component={() => <RegisterPage refetch={props.refetch} />} />
+      </Router>
     </div>
+
   );
 }
 
-export default App;
+
+
+
+export default activeSession(App);

@@ -1,0 +1,18 @@
+.form{
+    margin:20px auto;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-content: center;
+   
+    input{
+        margin-bottom: 15px;
+    }
+
+    button{
+        background-color: rgb(44, 44, 180);
+        height: 50px;
+        color: white;
+    }
+
+}
