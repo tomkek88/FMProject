@@ -1,0 +1,10 @@
+.loggedin {
+    display: flex;
+    justify-content: flex-end;
+    
+    padding-right: 1%;
+    .user{
+        
+        font-weight: bold;
+    }
+}

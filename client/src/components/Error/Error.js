@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import uuidv4 from 'uuid/v4';
+import './Error.scss'
 
 const Error = (props) => {
-    console.log(props.errors.graphQLErrors)
+
+    const errors = props.errors.graphQLErrors[0].message;
+    // console.log(Array.isArray(errors))
     return (
         <div>
-            {props.errors.graphQLErrors.map(error => (
-                <div>{error.message.split("Validation error: ")}</div>
-            ))}
+
+            {Array.isArray(errors) ? props.errors.graphQLErrors[0].message.map(error => (
+                <div className='error' key={uuidv4()}>{error.message}</div>
+            )) : <div className='error'>{props.errors.graphQLErrors[0].message}</div>}
         </div>
     )
 }

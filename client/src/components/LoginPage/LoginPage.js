@@ -32,7 +32,7 @@ class LoginForm extends Component {
         }).then(data => {
             const token = data.data.login.token
             localStorage.setItem('token', token)
-            this.props.history.push("/")
+            this.props.history.push("/profile")
             this.props.refetch()
         }).catch(err => console.log(err))
 
