@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/keys')
+const { GraphQLError } = require('graphql')
 
 module.exports = {
     Query: {
@@ -21,14 +22,16 @@ module.exports = {
                 email,
                 password: await bcrypt.hash(password, 10)
             }
-            await models.User.create(newUser);
-            // try {
-            //     await models.User.create(newUser);
-            //     return true;
-            // } catch (err) {
-            //     return err
+            // await models.User.create(newUser);
+            // return true;
+            try {
+                await models.User.create(newUser);
+                return true;
+            } catch (err) {
 
-            // }
+                return new GraphQLError(err.errors)
+
+            }
 
 
 
@@ -48,7 +51,7 @@ module.exports = {
                     email: user.email
                 }
 
-                const token = await jwt.sign(payload, JWT_SECRET, { expiresIn: 3600 })
+                const token = await jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' })
                 return { token }
             } catch (err) {
                 console.log(err)

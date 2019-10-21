@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { LOGIN_USER } from '../../GraphQL/mutations'
 import { withRouter } from 'react-router-dom'
+import Error from '../Error/Error'
+import './LoginPage.scss'
 
 const LoginPage = ({ history, refetch }) => {
     return (
@@ -44,14 +46,15 @@ class LoginForm extends Component {
             <Mutation mutation={LOGIN_USER}>
                 {
                     (login, { data, loading, error }) => (
-                        <div>
-                            {loading && <div>Loading</div>}
-                            <form onSubmit={(e) => { this.handleSubmit(e, login) }}>
-                                <label htmlFor="username">Username </label>
+                        <div className='container'>
+                            <h2 className="header">Logowanie</h2>
+                            <form className='form' onSubmit={(e) => { this.handleSubmit(e, login) }}>
+                                {error && <Error errors={error} />}
+                                <label htmlFor="username">Nazwa użytkownika </label>
                                 <input type="text" value={this.state.username} id="username" name="username" onChange={this.handleChange} />
-                                <label htmlFor="password">Password </label>
+                                <label htmlFor="password">Hasło </label>
                                 <input type="password" value={this.state.password} id="password" name="password" onChange={this.handleChange} />
-                                <button>Login</button>
+                                <button>Zaloguj</button>
                             </form>
                         </div>
                     )

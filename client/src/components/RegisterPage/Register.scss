@@ -1,9 +1,41 @@
-.form{
+body {
+    background-image: url('../../static//img//background.jpg');
+    background-size: cover;
+    // background-position: center;
+    background-repeat: no-repeat;
+}
+.container{
+    width: 50vw;
+    padding: 20px 0 40px 0;
+    background-color:  rgba(37, 24, 24, 0.63);
     margin:20px auto;
+    
+   
+.header{
+    display: flex;
+    font-weight: 500;
+    font-size: 150%;
+    margin-bottom: 25px;
+    color:white;
+    justify-content: center;
+
+
+}
+
+.form{
+    
     display: flex;
     flex-direction: column;
     width: 60%;
-    align-content: center;
+    margin: auto;
+    
+    label{
+        font-weight: 500;
+        font-size: 110%;
+        margin-bottom: 5px;
+        color:white;
+        
+    }
    
     input{
         margin-bottom: 15px;
@@ -13,6 +45,9 @@
         background-color: rgb(44, 44, 180);
         height: 50px;
         color: white;
+        font-weight: 400;
+        font-size: 110%;
     }
 
+}
 }

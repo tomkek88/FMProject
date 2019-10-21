@@ -45,19 +45,21 @@ class RegisterForm extends Component {
             <Mutation mutation={REGISTER_USER}>
                 {
                     (register, { loading, data, error }) => (
-
-                        <form className='form' onSubmit={(e) => { this.handleSubmit(e, register) }}>
-                            {error && <Error errors={error} />}
-                            <label htmlFor="username">Username </label>
-                            <input type="text" id="username" name="username" value={this.state.username} onChange={this.handleChange} />
-                            <label htmlFor="email">Email </label>
-                            <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} />
-                            <label htmlFor="password">Passoword </label>
-                            <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                            <label htmlFor="password2">Confirm password </label>
-                            <input type="password" id="password2" name="password2" value={this.state.password2} onChange={this.handleChange} />
-                            <button>Register</button>
-                        </form>
+                        <div className="container">
+                            <h2 className="header">Rejestracja</h2>
+                            <form className='form' onSubmit={(e) => { this.handleSubmit(e, register) }}>
+                                {error && <Error errors={error} />}
+                                <label htmlFor="username">Nazwa użytkownika </label>
+                                <input type="text" id="username" name="username" value={this.state.username} onChange={this.handleChange} />
+                                <label htmlFor="email">Email </label>
+                                <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} />
+                                <label htmlFor="password">Hasło </label>
+                                <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                                <label htmlFor="password2">Potwierdzenie hasła </label>
+                                <input type="password" id="password2" name="password2" value={this.state.password2} onChange={this.handleChange} />
+                                <button>Register</button>
+                            </form>
+                        </div>
                     )
                 }
             </Mutation>
