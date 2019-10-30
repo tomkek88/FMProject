@@ -21,7 +21,8 @@ const LogoutButton = () => {
 
 
 
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
+        localStorage.clear()
         await client.resetStore()
         // return <Redirect to='/login' />
 

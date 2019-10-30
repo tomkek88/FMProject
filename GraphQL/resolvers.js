@@ -17,7 +17,7 @@ module.exports = {
                 return new GraphQLError(err.errors)
             }
         },
-        building: async (root, { id }, { models }) => {
+        selectedBuilding: async (root, { id }, { models }) => {
             const building = await models.Building.findOne({ where: { id } });
             return building;
         }
@@ -29,7 +29,7 @@ module.exports = {
             if (user) throw new Error('user already exists');
             const ifemail = await models.User.findOne({ where: { email } });
             if (ifemail) throw new Error('Adres email już jest zajęty')
-
+           
 
             const newUser = {
                 uuid: uuidv4(),
@@ -37,10 +37,10 @@ module.exports = {
                 email,
                 password: await bcrypt.hash(password, 10)
             }
-            // await models.User.create(newUser);
-            // return true;
+            console.log(newUser)
             try {
                 await models.User.create(newUser);
+               
                 return true;
             } catch (err) {
 

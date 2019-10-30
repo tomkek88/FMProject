@@ -37,7 +37,7 @@ const user = (sequelize, DataTypes) => {
 
         }
     })
-
+    User.sync({force:false})
     return User;
 }
 

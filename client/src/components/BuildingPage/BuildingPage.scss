@@ -1,7 +1,30 @@
-.buildinglist{
-    border: 5px solid red;
-    color: wheat;
-    ul{
-        list-style-type: none;
+.container{
+    display: flex;
+    flex-direction: column;
+
+
+
+    .buildinglist{
+        // display: flex;
+        // justify-content: center;
+        margin:0 auto;
+       
+        // background-color: rgba(37, 24, 24, 0.63);
+        // border: 5px solid red;
+        color: wheat;
+        ul{
+            list-style-type: none;
+        }
+    
+    }
+    .button{
+        background-color: rgb(44, 44, 180);
+        height: 50px;
+        color: white;
+        font-weight: 400;
+        font-size: 110%;
+        border: none;
+        margin:0 auto;
     }
 }
+

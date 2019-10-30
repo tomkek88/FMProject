@@ -4,7 +4,9 @@ import './NavAuth.scss'
 import LoggedUser from '../../LoggedUser/LoggedUser'
 import LogoutButton from '../../LogoutPage/LogoutPage'
 
+
 import { withRouter } from 'react-router-dom'
+import SelectedBuilding from '../../SelectedBuilding/SelectedBuilding';
 
 
 class NavAuth extends Component {
@@ -23,7 +25,7 @@ class NavAuth extends Component {
                 <div className="loggeduser">
                     <LoggedUser />
                 </div>
-
+                <SelectedBuilding/>
             </div>
 
 

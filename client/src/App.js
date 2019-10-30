@@ -19,7 +19,7 @@ class App extends Component {
 
         <Router>
           {!this.props.loading && this.props.session && this.props.session.me ? <NavAuth /> : <NavNotAuth />}
-          {this.props.session && this.props.session.me ? <SelectedBuilding refetch={this.props.refetch} /> : null}
+          
           <Switch>
             <Route exact path='/' component={LandingPage} />
             {/* <Route path="/logout" component={() => this.props.session && this.props.session.me ? <LogoutPage /> : <LoginPage refetch={this.props.refetch} />} /> */}
@@ -31,7 +31,7 @@ class App extends Component {
             }} />
             <Route path='/buildingslist' component={() => {
               if (this.props.loading) return null
-              return this.props.session && this.props.session.me ? <BuildingPage /> : <Redirect to="/login" />
+              return this.props.session && this.props.session.me ? <BuildingPage refetch={this.props.refetch}/> : <Redirect to="/login" />
             }} />
           </Switch>
         </Router>

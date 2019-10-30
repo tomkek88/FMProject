@@ -1,75 +1,55 @@
-import React from 'react'
-import { Query, Mutation } from 'react-apollo'
-import { SHOW_BUILDINGS } from '../../GraphQL/queries'
-import { SELECT_BUILDING } from '../../GraphQL/mutations'
-import SelectedBuilding from '../SelectedBuilding/SelectedBuilding'
+import React, { Component } from "react";
+import {withRouter} from 'react-router-dom'
+import { Query, Mutation } from "react-apollo";
+import { SHOW_BUILDINGS } from "../../GraphQL/queries";
+import { SELECT_BUILDING } from "../../GraphQL/mutations";
+import SelectedBuilding from "../SelectedBuilding/SelectedBuilding";
 
-import './BuildingPage.scss'
+import "./BuildingPage.scss";
 
-const BuildingPage = () => {
+class BuildingPage extends Component {
+  handleChoose = (e, id) => {
+    localStorage.setItem("building", id);
+  };
 
-    const handleChoose = (e, selectBuilding, id, name) => {
-        selectBuilding({
-            variables: {
-                id,
-                name,
-                __typename: "building"
-            }
-        })
+  onBuildingChoose = () => {
+    // const chosen = localStorage.getItem("building");
+    this.props.history.push('/profile')
+    this.props.refetch()
+    
+  };
 
-    }
-
+  render() {
     return (
+      <Query query={SHOW_BUILDINGS}>
+        {({ data, loading, error }) => {
+          if (error) throw new Error(error);
+          if (loading) return <h2>Loading...</h2>;
 
-        <Query query={SHOW_BUILDINGS}>
-            {
-                ({ data, loading, error }) => {
-
-
-
-                    if (error) throw new Error(error)
-                    if (loading) return <h2>Loading...</h2>
-
-
-                    return <div className="buildinglist" >
-                        <ul>
-                            {data.buildings.map(building => (
-                                <li key={building.id}>
-
-
-                                    <Mutation mutation={SELECT_BUILDING}>
-
-                                        {
-                                            (selectBuilding, { loading, error, data }) => {
-                                                if (loading) return <h2>Loading....</h2>
-                                                if (error) console.log(error)
-                                                console.log(data)
-                                                return (
-                                                    <div>
-                                                        <h3 onClick={(e) => handleChoose(e, selectBuilding, building.id, building.name)} >{building.name}</h3>
-
-                                                    </div>
-                                                )
-                                            }
-                                        }
-                                    </Mutation>
-
-
-
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-
-                }
-            }
-        </Query>
-
-    )
+          return (
+            <div className="container">
+              <div className="buildinglist">
+                <ul>
+                  {data.buildings.map(building => (
+                    <li key={building.id}>
+                      <div>
+                        <h3 onClick={e => this.handleChoose(e, building.id)}>
+                          {building.name}
+                        </h3>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button className="button" onClick={this.onBuildingChoose}>
+                Wybierz
+              </button>
+            </div>
+          );
+        }}
+      </Query>
+    );
+  }
 }
 
-
-
-
-export default BuildingPage
+export default withRouter(BuildingPage);

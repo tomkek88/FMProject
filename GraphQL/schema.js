@@ -5,7 +5,7 @@ module.exports = gql`
     type Query{
         me: User
         buildings: [Building]
-        building(id:ID!): Building
+        selectedBuilding(id:ID!): Building
     }
 
     type Mutation{

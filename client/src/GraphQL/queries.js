@@ -21,10 +21,11 @@ export const SHOW_BUILDINGS = gql`
 `
 
 export const SELECTED_BUILDING = gql`
-    query selectedBuilding{
-        selectedBuilding @client{
+    query selectedBuilding($id:ID!){
+        selectedBuilding(id:$id){
         id
         name
+        location
         }
     }
 `
