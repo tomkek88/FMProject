@@ -1,36 +1,49 @@
 import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import './LogoutButton.scss'
 
-const LogoutPage = (history) => {
-    return (
-        <LogoutButton history={history} />
-    )
-
-}
-
-class LogoutButton extends Component {
-
-    logout = async (client) => {
-        localStorage.removeItem('token');
-        await client.resetStore()
-        this.props.history.pushState('/')
-    }
-
+class LogoutPage extends Component {
     render() {
+
         return (
-            <ApolloConsumer>
-                {
-                    client => (
-                        <button className='logoutButton' onClick={() => this.logout(client)}>Logout</button>
-                    )
-                }
-            </ApolloConsumer>
+            <LogoutButton history={this.props.history} />
         )
     }
 
+
 }
 
-export default withRouter(LogoutPage);
+const LogoutButton = () => {
+
+    const onLogout = async (client) => {
+
+
+
+
+        localStorage.removeItem('token');
+        await client.resetStore()
+        // return <Redirect to='/login' />
+
+
+
+
+
+    }
+    return (
+        <ApolloConsumer>
+            {
+                client => (
+
+                    <button className="logoutButton" onClick={() => onLogout(client)}>Wyloguj</button>
+
+
+                )
+            }
+        </ApolloConsumer>
+
+    )
+}
+
 export { LogoutButton }
+export default withRouter(LogoutPage)

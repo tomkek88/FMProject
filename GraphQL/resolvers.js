@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const uuidv4 = require('uuid/v4')
 const { JWT_SECRET } = require('../config/keys')
 const { GraphQLError } = require('graphql')
 
@@ -7,6 +8,18 @@ module.exports = {
     Query: {
         me: (root, args, { me }) => {
             return me
+        },
+        buildings: async (root, args, { models, me }) => {
+            const buildings = await models.Building.findAll({ where: { userId: me.id } });
+            try {
+                return buildings;
+            } catch (err) {
+                return new GraphQLError(err.errors)
+            }
+        },
+        building: async (root, { id }, { models }) => {
+            const building = await models.Building.findOne({ where: { id } });
+            return building;
         }
     },
 
@@ -14,10 +27,12 @@ module.exports = {
         register: async (root, { username, email, password }, { models }) => {
             const user = await models.User.findOne({ where: { username } });
             if (user) throw new Error('user already exists');
-
+            const ifemail = await models.User.findOne({ where: { email } });
+            if (ifemail) throw new Error('Adres email już jest zajęty')
 
 
             const newUser = {
+                uuid: uuidv4(),
                 username,
                 email,
                 password: await bcrypt.hash(password, 10)
@@ -58,6 +73,27 @@ module.exports = {
             }
 
 
+        },
+        addBuilding: async (root, { name, location }, { models, me }) => {
+            const building = await models.Building.findOne({ where: { name, userId: me.id } });
+            if (building) throw new Error('Budynek o tej nazwie już istnieje w Twojej bazie')
+
+            const newBuilding = {
+                name,
+                location,
+                addedOn: Date.now(),
+                userId: me.id
+            }
+
+            try {
+                console.log("new building id : ", newBuilding.id)
+                await models.Building.create(newBuilding);
+                return true
+
+            } catch (err) {
+                console.log(err)
+                return new GraphQLError(err)
+            }
         }
     }
 }

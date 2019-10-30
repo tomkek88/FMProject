@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { REGISTER_USER } from '../../GraphQL/mutations'
+import { withRouter } from 'react-router-dom'
 import Error from '../Error/Error'
 
 import './Register.scss'
 
 
-const RegisterPage = () => {
+const RegisterPage = ({ history }) => {
     return (
-        <RegisterForm />
+        <RegisterForm history={history} />
     )
 }
 
@@ -37,7 +38,8 @@ class RegisterForm extends Component {
                 email: this.state.email,
                 password: this.state.password
             }
-        }).then(data => console.log(data)).catch(err => console.log(err))
+        }).then(() => this.props.history.push('login')).catch(err => err)
+
     }
 
     render() {
@@ -45,6 +47,7 @@ class RegisterForm extends Component {
             <Mutation mutation={REGISTER_USER}>
                 {
                     (register, { loading, data, error }) => (
+
                         <div className="container">
                             <h2 className="header">Rejestracja</h2>
                             <form className='form' onSubmit={(e) => { this.handleSubmit(e, register) }}>
@@ -52,7 +55,7 @@ class RegisterForm extends Component {
                                 <label htmlFor="username">Nazwa użytkownika </label>
                                 <input type="text" id="username" name="username" value={this.state.username} onChange={this.handleChange} />
                                 <label htmlFor="email">Email </label>
-                                <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} />
+                                <input type="text" id="email" name="email" value={this.state.email} onChange={this.handleChange} noValidate />
                                 <label htmlFor="password">Hasło </label>
                                 <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} />
                                 <label htmlFor="password2">Potwierdzenie hasła </label>
@@ -67,4 +70,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterPage
+export default withRouter(RegisterPage)

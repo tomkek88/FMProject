@@ -5,33 +5,26 @@ const user = (sequelize, DataTypes) => {
             unique: true,
             primaryKey: true
         },
+        uuid: {
+            type: DataTypes.STRING
+        },
         username: {
             type: DataTypes.STRING,
             required: true,
             allowNull: false,
-            validate: {
-                isNull: {
 
-                    msg: 'Username field is required'
-                },
-                len: {
-                    args: [5, 30],
-                    msg: 'Username must be between 5 and 30 characters'
-                },
-
-            }
 
         },
         email: {
             type: DataTypes.STRING,
-            unique: true,
+
             required: true,
             allowNull: false,
             validate: {
 
-                len: {
-                    args: [6, 30],
-                    msg: 'Email must be between 6 and 30 characters'
+                isEmail: {
+                    args: true,
+                    msg: 'Nieprawidłowy adres email'
                 },
 
             }

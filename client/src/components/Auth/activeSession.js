@@ -6,8 +6,8 @@ const activeSession = Component => props => {
     return (
         <Query query={LOGGED_IN_USER}>
             {
-                ({ refetch, data }) => (
-                    <Component {...props} session={data} refetch={refetch} />
+                ({ refetch, data, loading }) => (
+                    <Component {...props} session={data} refetch={refetch} loading={loading} />
                 )
             }
 

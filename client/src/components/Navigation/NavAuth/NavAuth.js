@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../Navigation.scss'
+import './NavAuth.scss'
 import LoggedUser from '../../LoggedUser/LoggedUser'
-import { LogoutButton } from '../../LogoutPage/LogoutPage'
-const NavAuth = () => {
-    return (
-        <div>
+import LogoutButton from '../../LogoutPage/LogoutPage'
+
+import { withRouter } from 'react-router-dom'
+
+
+class NavAuth extends Component {
+
+    render() {
+
+        return (
 
             <div className="navBar">
+                <div className='navigation' >
 
-                <Link className='navComponent' to="/profile">Profile</Link>
-                {/* <Link className='navComponent' to="/logout">Logout</Link> */}
-                <LogoutButton />
+                    <Link className='navComponent' to="/profile">Profil</Link>
+                    <LogoutButton />
+
+                </div>
+                <div className="loggeduser">
+                    <LoggedUser />
+                </div>
+
             </div>
-            <LoggedUser />
-        </div>
-    )
+
+
+        )
+    }
+
+
 }
 
-export default NavAuth
+export default withRouter(NavAuth)

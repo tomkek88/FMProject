@@ -9,3 +9,22 @@ export const LOGGED_IN_USER = gql`
         }
     }
 `
+
+export const SHOW_BUILDINGS = gql`
+    {
+        buildings{
+            id
+            name
+            location
+        }
+    }
+`
+
+export const SELECTED_BUILDING = gql`
+    query selectedBuilding{
+        selectedBuilding @client{
+        id
+        name
+        }
+    }
+`

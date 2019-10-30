@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
-import ApolloClient from 'apollo-boost'
+import ApolloClient from 'apollo-boost';
+
+import clientState from './GraphQL/clientState'
 
 import App from './App';
 
@@ -20,7 +22,11 @@ const client = new ApolloClient({
         } else {
             operation.setContext({})
         }
-    }
+    },
+    clientState
+
+
+
 })
 
 ReactDOM.render(

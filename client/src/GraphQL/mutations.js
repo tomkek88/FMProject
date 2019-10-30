@@ -13,3 +13,10 @@ export const REGISTER_USER = gql`
         register(username:$username,email:$email,password:$password)
   }
 `
+
+export const SELECT_BUILDING = gql`
+    mutation selectBuilding($id: ID,$name:String){
+        selectBuilding(id:$id, name:$name) @client
+    }
+   
+`

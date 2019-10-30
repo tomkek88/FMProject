@@ -1,15 +1,16 @@
 .navBar{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 6fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 2fr 6fr 2fr;
     
-    grid-template-areas: 
-    "navigation navigation navigation" 
-    "none selectedbuilding none";
+    
    
     background-color: rgba(37, 24, 24, 0.63);
     height: 100px;
-    .navComponent {
+    .navigation {
+
+        grid-column: 3/4;
+        grid-row:2/3;
 
         display: flex;
         // border: solid red 1px;
@@ -24,6 +25,11 @@
     .selectedbuilding{
        
         
+    }
+    .loggeduser{
+       
+        grid-column: 3/4;
+        grid-row: 1/2;
     }
     
 }
