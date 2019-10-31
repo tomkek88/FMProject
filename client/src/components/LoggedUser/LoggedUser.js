@@ -4,7 +4,7 @@ import './LoggedUser.scss'
 
 const LoggedUser = (props) => {
 
-    console.log(props.session.me)
+    // console.log(props.session.me)
     return (
         <div>
             {<div className="loggedin">Zalogowano jako: <span className="user">{props.session.me.username}</span></div>}

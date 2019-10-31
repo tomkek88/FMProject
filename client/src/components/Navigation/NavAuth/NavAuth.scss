@@ -2,28 +2,29 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 2fr 6fr 2fr;
-    
-    
-   
+
     background-color: rgba(37, 24, 24, 0.63);
-    height: 100px;
+    height: 10vh;
     .navigation {
 
         grid-column: 3/4;
-        grid-row:2/3;
+        grid-row:2/4;
 
         display: flex;
+        margin: auto;
         // border: solid red 1px;
-        align-self: flex-end;
+        // align-self: flex-end;
         color: white;
         text-decoration: none;
         align-items: center;
         text-transform: uppercase;
-        padding: 0 20px;
+       
     
     }
     .selectedbuilding{
-       
+       grid-column: 2/3;
+       grid-row: 3/4;
+       margin: 0 auto;
         
     }
     .loggeduser{
@@ -31,6 +32,18 @@
         grid-column: 3/4;
         grid-row: 1/2;
     }
-    
+    .changeBuildingButton{
+        grid-column: 2/3;
+        grid-row:1/2;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        background-color: rgb(44, 44, 180);
+        width: 60%;
+        color: white;
+        font-weight: 400;
+        font-size: 110%;
+        text-decoration: none;
+    }
 }
 
