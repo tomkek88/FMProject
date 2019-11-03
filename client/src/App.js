@@ -10,6 +10,7 @@ import SideNav from './components/Navigation/SideNav/SideNav';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import BuildingPage from './components/BuildingPage/BuildingPage';
+import BuildingsList from './components/BuildingsList/BuildingsList';
 import SpaceList from './components/SpaceList/SpaceList'
 
 import "./App.scss"
@@ -28,8 +29,8 @@ class App extends Component {
           {!this.props.loading && this.props.session && this.props.session.me ? <SideNav /> : null}
           <Switch>
             <Route exact path='/' component={LandingPage} />
-            <Route path="/spaces" component={() => this.props.session && this.props.session.me ? <SpaceList /> : <Redirect to="/login" />} />
-
+            <Route path="/spaces" component={() => this.props.session && this.props.session.me ? <SpaceList refetch={this.props.refetch}/> : <Redirect to="/login" />} />
+            <Route path="/buildings" component={()=> this.props.session && this.props.session.me ? <BuildingsList refetch={this.props.refetch} /> : <Redirect to="/login" />}/>
 
             <Route path='/login' component={() => this.props.session && this.props.session.me ? <Redirect to="/" /> : <LoginPage refetch={this.props.refetch} />} />
             <Route path='/register' component={() => this.props.session && this.props.session.me ? <Redirect to="/profile" /> : <RegisterPage refetch={this.props.refetch} />} />

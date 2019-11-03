@@ -20,6 +20,11 @@ module.exports = {
         selectedBuilding: async (root, { id }, { models }) => {
             const building = await models.Building.findOne({ where: { id } });
             return building;
+        },
+        showSpaces: async (root, {buildingId},{models}) =>{
+            
+            const spaces = await models.Space.findAll({where:{buildingId}})
+            return spaces
         }
     },
 
@@ -94,6 +99,27 @@ module.exports = {
                 console.log(err)
                 return new GraphQLError(err)
             }
+        },
+        addSpace: async (root,{name,number,area,level,buildingId},{models})=>{
+            const space = await models.Space.findOne({where:{number,buildingId}})
+            if(space) throw new Error('numery pomieszczeń nie mogą się powtarzać')
+
+            const newSpace = {
+                name,
+                number,
+                area,
+                level,
+                buildingId
+            }
+
+            try{
+                await models.Space.create(newSpace)
+                return true
+            }catch(err){
+                console.log(err)
+                return new GraphQLError(err)
+            }
+            
         }
     }
 }

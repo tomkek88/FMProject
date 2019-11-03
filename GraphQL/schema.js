@@ -6,12 +6,14 @@ module.exports = gql`
         me: User
         buildings: [Building]
         selectedBuilding(id:ID!): Building
+        showSpaces(buildingId:ID!): [Space]
     }
 
     type Mutation{
         register(username: String!, email: String!, password: String!): Boolean
         login(username:String!, password: String!):Token
-        addBuilding(name:String!):Boolean
+        addBuilding(name:String!, location:String):Boolean
+        addSpace(name:String, number:String, area:Float,level:String!,buildingId:ID!):Boolean
     }
 
     type User {
@@ -28,6 +30,16 @@ module.exports = gql`
         location:String
         addedOn: String!
         userId: ID!
+
+    }
+
+    type Space {
+        id:ID!
+        name:String
+        number:String
+        area: Float
+        level:String!
+        buildingId: ID!
 
     }
 
