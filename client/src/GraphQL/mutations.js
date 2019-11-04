@@ -20,8 +20,13 @@ export const SELECT_BUILDING = gql`
     }
    
 `
+export const ACTIVATE_SPACE = gql`
+    mutation activateSpace{
+        activateSpace @client
+    }
+`
 
-export const ADD_NEW_BULDING=gql`
+export const ADD_NEW_BULDING = gql`
 
     mutation addBuilding($name:String!,$location:String){
         addBuilding(name:$name, location:$location)
@@ -29,7 +34,7 @@ export const ADD_NEW_BULDING=gql`
 
 `
 
-export const ADD_NEW_SPACE=gql`
+export const ADD_NEW_SPACE = gql`
     mutation addSpace($name:String, $number:String, $area:Float, $level:String!, $buildingId:ID!){
         addSpace(name:$name,number:$number,area:$area,level:$level,buildingId:$buildingId)
     }

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import {withRouter} from 'react-router-dom'
-import { Query, Mutation } from "react-apollo";
+import { withRouter } from 'react-router-dom'
+import { Query } from "react-apollo";
 import { SHOW_BUILDINGS } from "../../GraphQL/queries";
-import { SELECT_BUILDING } from "../../GraphQL/mutations";
-import SelectedBuilding from "../SelectedBuilding/SelectedBuilding";
 
 import "./BuildingPage.scss";
 
@@ -16,7 +14,7 @@ class BuildingPage extends Component {
     // const chosen = localStorage.getItem("building");
     this.props.history.push('/profile')
     this.props.refetch()
-    
+
   };
 
   render() {

@@ -26,7 +26,7 @@ const building = (sequelize, DataTypes) => {
             field: "user_id"
         }
     })
-    Building.sync({force:false})
+    Building.sync({ force: false })
     return Building;
 }
 

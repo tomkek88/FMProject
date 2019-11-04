@@ -17,13 +17,20 @@ module.exports = {
                 return new GraphQLError(err.errors)
             }
         },
-        selectedBuilding: async (root, { id }, { models }) => {
-            const building = await models.Building.findOne({ where: { id } });
-            return building;
+        selectedBuilding: async (root, { id }, { models, me }) => {
+            const building = await models.Building.findOne({ where: { id, userId: me.id } });
+            if (building) {
+                console.log('building found')
+                return building;
+            } else {
+                console.log('building not found')
+                return null
+            }
+
         },
-        showSpaces: async (root, {buildingId},{models}) =>{
-            
-            const spaces = await models.Space.findAll({where:{buildingId}})
+        showSpaces: async (root, { buildingId }, { models }) => {
+
+            const spaces = await models.Space.findAll({ where: { buildingId } })
             return spaces
         }
     },
@@ -34,7 +41,7 @@ module.exports = {
             if (user) throw new Error('user already exists');
             const ifemail = await models.User.findOne({ where: { email } });
             if (ifemail) throw new Error('Adres email już jest zajęty')
-           
+
 
             const newUser = {
                 uuid: uuidv4(),
@@ -45,7 +52,7 @@ module.exports = {
             console.log(newUser)
             try {
                 await models.User.create(newUser);
-               
+
                 return true;
             } catch (err) {
 
@@ -80,6 +87,7 @@ module.exports = {
 
         },
         addBuilding: async (root, { name, location }, { models, me }) => {
+            console.log(me)
             const building = await models.Building.findOne({ where: { name, userId: me.id } });
             if (building) throw new Error('Budynek o tej nazwie już istnieje w Twojej bazie')
 
@@ -96,13 +104,13 @@ module.exports = {
                 return true
 
             } catch (err) {
-                console.log(err)
+                console.log(err.errors)
                 return new GraphQLError(err)
             }
         },
-        addSpace: async (root,{name,number,area,level,buildingId},{models})=>{
-            const space = await models.Space.findOne({where:{number,buildingId}})
-            if(space) throw new Error('numery pomieszczeń nie mogą się powtarzać')
+        addSpace: async (root, { name, number, area, level, buildingId }, { models }) => {
+            const space = await models.Space.findOne({ where: { number, buildingId } })
+            if (space) throw new Error('numery pomieszczeń nie mogą się powtarzać')
 
             const newSpace = {
                 name,
@@ -112,14 +120,14 @@ module.exports = {
                 buildingId
             }
 
-            try{
+            try {
                 await models.Space.create(newSpace)
                 return true
-            }catch(err){
-                console.log(err)
+            } catch (err) {
+                console.log(err.errors)
                 return new GraphQLError(err)
             }
-            
+
         }
     }
 }

@@ -1,5 +1,4 @@
-import { SELECTED_BUILDING } from './queries';
-import { SELECT_BUILDING } from './mutations'
+
 
 const clientState = {
     defaults: {
@@ -7,6 +6,9 @@ const clientState = {
             id: null,
             name: null,
             __typename: "building"
+        }, activeSpace: {
+            active: false,
+            __typename: 'space'
         }
     },
     resolvers: {
@@ -21,6 +23,7 @@ const clientState = {
         // },
         Mutation: {
             selectBuilding: (_, { id, name }, { cache }) => {
+
                 const data = {
 
                     selectedBuilding: {
@@ -33,6 +36,18 @@ const clientState = {
                 cache.writeData({ data })
                 return null
 
+            },
+            activateSpace: (_, args, { cache }) => {
+                console.log('mutation active')
+                const data = {
+                    activeSpace: {
+                        active: true,
+                        __typename: 'space'
+                    }
+
+                }
+                cache.writeData({ data })
+                return null
             }
         }
     }

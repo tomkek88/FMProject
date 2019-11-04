@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import './LogoutButton.scss'
 
 class LogoutPage extends Component {

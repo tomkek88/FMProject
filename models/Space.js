@@ -1,30 +1,30 @@
 const space = (sequelize, DataTypes) => {
-    const Space = sequelize.define('space',{
-        id:{
+    const Space = sequelize.define('space', {
+        id: {
             type: DataTypes.STRING,
-            unique:true,
-            primaryKey:true
+            unique: true,
+            primaryKey: true
         },
         name: {
             type: DataTypes.STRING,
 
         },
-        number:{
+        number: {
             type: DataTypes.STRING
         },
-        area:{
-            type:DataTypes.FLOAT
+        area: {
+            type: DataTypes.FLOAT
         },
-        level:{
-            type:DataTypes.STRING,
-            required:true
+        level: {
+            type: DataTypes.STRING,
+            required: true
         },
-        buildingId:{
-            type:DataTypes.STRING,
-            required:true
+        buildingId: {
+            type: DataTypes.STRING,
+            required: true
         }
     })
-    Space.sync({force:false})
+    Space.sync({ force: false })
     return Space
 
 }

@@ -32,6 +32,7 @@ export const SELECTED_BUILDING = gql`
 export const SHOW_SPACES = gql`
   query showSpaces($buildingId:ID!){
     showSpaces(buildingId:$buildingId){
+        id
         name
         number
         area
