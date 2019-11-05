@@ -3,7 +3,9 @@ const { sequelize } = require('./dbConnection');
 const models = {
     User: sequelize.import('./User'),
     Building: sequelize.import('./Building'),
-    Space: sequelize.import('./Space')
+    Level: sequelize.import('./Level'),
+    Space: sequelize.import('./Space'),
+    Equipment: sequelize.import('./Equipment')
 
 }
 

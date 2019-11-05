@@ -15,7 +15,7 @@ const space = (sequelize, DataTypes) => {
         area: {
             type: DataTypes.FLOAT
         },
-        level: {
+        level_id: {
             type: DataTypes.STRING,
             required: true
         },

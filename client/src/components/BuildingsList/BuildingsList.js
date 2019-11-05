@@ -26,7 +26,7 @@ class BuildingsList extends Component {
                             if (error) console.log(error)
 
                             // console.log(data.buildings)
-                            if (data.buildings.length === 0) return <h3>Brak budynkow w bazie</h3>
+                            if (!data && data.buildings.length === 0) return <h3>Brak budynkow w bazie</h3>
                             return (
                                 <div>
                                     <ul>

@@ -47,7 +47,9 @@ module.exports = {
                 uuid: uuidv4(),
                 username,
                 email,
-                password: await bcrypt.hash(password, 10)
+                password: await bcrypt.hash(password, 10),
+                joined_on: new Date()
+
             }
             console.log(newUser)
             try {

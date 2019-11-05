@@ -38,7 +38,7 @@ module.exports = gql`
         name:String
         number:String
         area: Float
-        level:String!
+        level_id:ID!
         buildingId: ID!
 
     }

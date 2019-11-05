@@ -5,12 +5,15 @@ import { withRouter } from 'react-router-dom'
 import Error from '../Error/Error'
 import './LoginPage.scss'
 
-const LoginPage = ({ history, refetch }) => {
-    return (
+class LoginPage extends Component {
+    render() {
+        return (
 
-        <LoginForm history={history} refetch={refetch} />
+            <LoginForm history={this.props.history} refetch={this.props.refetch} />
 
-    )
+        )
+    }
+
 }
 
 class LoginForm extends Component {

@@ -36,7 +36,7 @@ export const SHOW_SPACES = gql`
         name
         number
         area
-        level
+        level_id
     }
    }
 `

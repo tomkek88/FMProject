@@ -35,9 +35,13 @@ const user = (sequelize, DataTypes) => {
 
             allowNull: false
 
+        },
+        joined_on: {
+            type: DataTypes.DATE
+
         }
     })
-    User.sync({force:false})
+    User.sync({ force: false })
     return User;
 }
 

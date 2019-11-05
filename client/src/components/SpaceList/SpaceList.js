@@ -4,7 +4,7 @@ import { SHOW_SPACES } from '../../GraphQL/queries'
 import { ADD_NEW_SPACE } from '../../GraphQL/mutations'
 import EquipmentList from '../Equipment/EquipmentList';
 
-
+import './SpaceList.scss'
 
 
 class SpaceList extends Component {
@@ -12,18 +12,26 @@ class SpaceList extends Component {
     state = {
         addSpaceFormActive: false,
         activeSpace: false,
-        showEquipment: false
+        showEquipment: false,
+        spaceChosen: null
     }
 
     showEquipment = () => {
-        this.setState({ showEquipment: true })
+        this.setState({
+            showEquipment: true,
+            spaceChosen: localStorage.getItem('activeSpace')
+        })
     }
 
 
     handleActiveSpaceForm = () => {
         this.setState({
-            addSpaceFormActive: true
+            addSpaceFormActive: true,
+            showEquipment: false,
+            activeSpace: false,
+
         })
+        localStorage.removeItem('activeSpace')
     }
 
     handleChoose = (e, space) => {
@@ -32,7 +40,7 @@ class SpaceList extends Component {
 
         localStorage.setItem('activeSpace', space.id)
 
-        this.setState({ activeSpace: true })
+        this.setState({ activeSpace: true, addSpaceFormActive: false })
 
     }
 
@@ -40,7 +48,7 @@ class SpaceList extends Component {
 
 
 
-        if (!localStorage.getItem('building')) return <h3 className="spaceList">Proszę wybrac budynek</h3>
+        if (!localStorage.getItem('building')) return <h3 className="spaceContainer">Proszę wybrac budynek</h3>
 
         return (
             <div className="spaceContainer">
@@ -61,7 +69,7 @@ class SpaceList extends Component {
                                         <ul>
                                             {data.showSpaces.map(space => {
 
-                                                return <div key={space.id} onClick={(e) => this.handleChoose(e, space)}>
+                                                return <div className={localStorage.getItem('activeSpace') === space.id ? 'active' : null} key={space.id} onClick={(e) => this.handleChoose(e, space)}>
                                                     <li >
 
                                                         {space.name}
@@ -92,7 +100,7 @@ class SpaceList extends Component {
                     {this.state.addSpaceFormActive && <SpaceForm refetch={this.props.refetch} />}
                 </div>
 
-                {this.state.showEquipment && <EquipmentList space={1} />}
+                {this.state.showEquipment && <EquipmentList space={this.state.spaceChosen} />}
 
             </div>
         )
@@ -178,6 +186,13 @@ class SpaceForm extends Component {
                             <input type="text" placeholder="numer pomieszczenia" name="number" value={this.state.number} onChange={this.handleChange} />
                             <input type="number" placeholder="powierzchnia" name="area" value={this.state.area} onChange={this.handleChange} />
                             <input type="text" placeholder="poziom" name="level" value={this.state.level} onChange={this.handleChange} />
+
+
+                            <select>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
                             <button>Dodaj</button>
                         </form>
                     )
