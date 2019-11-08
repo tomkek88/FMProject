@@ -12,6 +12,7 @@ import ProfilePage from './components/ProfilePage/ProfilePage';
 import BuildingPage from './components/BuildingPage/BuildingPage';
 import BuildingsList from './components/BuildingsList/BuildingsList';
 import SpaceList from './components/SpaceList/SpaceList'
+import Visual from './components/Visual/Visual'
 import jwt from 'jsonwebtoken'
 
 import "./App.scss"
@@ -44,7 +45,7 @@ class App extends Component {
         <div className="main_container">
           {!this.props.loading && this.props.session && this.props.session.me ? <SideNav /> : null}
           <Switch>
-            <Route exact path='/' component={LandingPage} />
+            <Route exact path='/' component={() => this.props.session && this.props.session.me ? <Visual /> : <LandingPage />} />
             <Route path="/spaces" component={() => this.props.session && this.props.session.me ? <SpaceList refetch={this.props.refetch} /> : <Redirect to="/login" />} />
             <Route path="/buildings" component={() => this.props.session && this.props.session.me ? <BuildingsList refetch={this.props.refetch} /> : <Redirect to="/login" />} />
 

@@ -40,3 +40,13 @@ export const SHOW_SPACES = gql`
     }
    }
 `
+export const SHOW_LEVELS = gql`
+   query showLevels($buildingId:ID!){
+       showLevels(buildingId:$buildingId){
+           id
+           name
+           elevation
+       }
+   }
+
+`

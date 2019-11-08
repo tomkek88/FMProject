@@ -39,3 +39,8 @@ export const ADD_NEW_SPACE = gql`
         addSpace(name:$name,number:$number,area:$area,level:$level,buildingId:$buildingId)
     }
 `
+export const ADD_LEVEL = gql`
+    mutation addLevel($revitId:ID,$name:String!,$elevation:Float!,$buildingId:ID!){
+        addLevel(revitId:$revitId,name:$name,elevation:$elevation,buildingId:$buildingId)
+    }
+`

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo'
 import { SHOW_SPACES } from '../../GraphQL/queries'
 import { ADD_NEW_SPACE } from '../../GraphQL/mutations'
+import { SHOW_LEVELS } from '../../GraphQL/queries'
 import EquipmentList from '../Equipment/EquipmentList';
 
 import './SpaceList.scss'
@@ -185,14 +186,36 @@ class SpaceForm extends Component {
                             <input type="text" placeholder="nazwa pomieszczenia" name="name" value={this.state.name} onChange={this.handleChange} />
                             <input type="text" placeholder="numer pomieszczenia" name="number" value={this.state.number} onChange={this.handleChange} />
                             <input type="number" placeholder="powierzchnia" name="area" value={this.state.area} onChange={this.handleChange} />
-                            <input type="text" placeholder="poziom" name="level" value={this.state.level} onChange={this.handleChange} />
 
 
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
+
+
+
+                            <Query query={SHOW_LEVELS} variables={{ buildingId: this.state.buildingId }}>
+                                {
+                                    ({ data, loading, error }) => {
+                                        if (loading) return <h3>Loading...</h3>
+                                        return (
+                                            <select name="level" id="level" >
+                                                <option value="" disabled hidden>Wybierz kondygnację</option>
+                                                {data.showLevels.map(level => (
+                                                    <option key={level.id} elevation={level.elevation} value={level.name}>{level.name}</option>
+                                                )).sort((a, b) => {
+                                                    // console.log(a, b)
+                                                    if (a.props.elevation > b.props.elevation) {
+
+                                                        return -1
+                                                    } else {
+                                                        return 1
+                                                    }
+                                                })}
+                                            </select>
+                                        )
+                                    }
+                                }
+                            </Query>
+
+
                             <button>Dodaj</button>
                         </form>
                     )
